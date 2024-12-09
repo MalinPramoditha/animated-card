@@ -40,12 +40,14 @@ function MyComponent() {
 | initialAngle | string | "0deg" | Initial gradient angle |
 | followMouse | boolean | false | Enable mouse-following gradient effect |
 | className | string | "" | Additional CSS classes |
+| style | string | "" | Additional CSS classes |
 
 ### AnimatedCardContent
 
 | Prop | Type | Description |
 |------|------|-------------|
 | className | string | Additional CSS classes |
+| style | string | "" | Additional CSS classes |
 
 ## License
 
