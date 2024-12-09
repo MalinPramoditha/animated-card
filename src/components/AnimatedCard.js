@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function AnimatedCard({
   children, 
@@ -7,12 +7,36 @@ export default function AnimatedCard({
   speed = "10",
   initialAngle = "0deg",
   followMouse = false,
-  className,
+  className = "flex w-full h-full rounded-[20px] p-4", 
+  style,
 }) {
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
 
+  useEffect(() => {
+    const styleSheet = document.createElement("style");
+    styleSheet.textContent = `
+      @property --angle {
+        syntax: '<angle>';
+        initial-value: ${initialAngle};
+        inherits: false;
+      }
+      
+      @keyframes gradient-rotate {
+        0% {
+          --angle: ${initialAngle};
+        }
+        100% {
+          --angle: calc(${initialAngle} + 360deg);
+        }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+    return () => styleSheet.remove();
+  }, [initialAngle]);
+
   const handleMouseMove = (e) => {
+    if (!followMouse) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
@@ -20,37 +44,37 @@ export default function AnimatedCard({
   };
 
   const handleMouseEnter = () => {
+    if (!followMouse) return;
     setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
+    if (!followMouse) return;
     setIsHovered(false);
     setMousePosition({ x: 50, y: 50 });
   };
 
-  const style = {
-    background: followMouse 
-      ? (isHovered 
-          ? `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, ${colors})`
-          : `linear-gradient(var(--angle), ${colors})`)
-      : `linear-gradient(var(--angle), ${colors})`,
-    '--rotation-speed': `${speed}s`,
-    '--initial-angle': initialAngle,
-    '--angle': initialAngle,
+  const getBackground = () => {
+    if (followMouse && isHovered) {
+      return `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, ${colors})`;
+    }
+    return `linear-gradient(var(--angle), ${colors})`;
+  };
+
+  const cardStyle = {
+    ...style,
+    background: getBackground(),
+    animation: (!isHovered || !followMouse) ? `gradient-rotate ${speed}s linear infinite` : 'none',
     transition: 'background 0.2s ease',
-  }
+  };
 
   return (
     <div 
-      style={style} 
+      style={cardStyle}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`
-        flex w-full h-full rounded-[20px] p-4 
-        ${!isHovered || !followMouse ? 'animate-gradient-rotate' : ''} 
-        ${className}
-      `}
+      className={className}
     >
       {children}
     </div>

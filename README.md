@@ -18,6 +18,7 @@ function MyComponent() {
     <AnimatedCard
       colors="#4B4D4D 0%, #4B4D4D 20%, #a21caf 40%, #f59e0b 60%, #4B4D4D 80%, #4B4D4D 100%"
       speed="10"
+      initialAngle="0deg"
       followMouse={true}
     >
       <AnimatedCardContent>
