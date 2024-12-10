@@ -49,6 +49,41 @@ function MyComponent() {
 | className | string | Additional CSS classes |
 | style | string | "" | Additional CSS classes |
 
+## Tailwind CSS Setup
+
+This component uses Tailwind CSS for styling. To use it in your project:
+
+1. Make sure Tailwind CSS is installed in your project:
+```bash
+npm install -D tailwindcss postcss autoprefixer
+```
+
+2. Add the following to your `tailwind.config.js`:
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    // ... your project files
+    "./node_modules/next-animated-cards/**/*.{js,jsx,ts,tsx}" // Add this line
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+3. You can override default styles using className prop:
+```jsx
+<AnimatedCard
+  className="p-4 rounded-xl bg-blue-500" // This will override default padding and border radius
+>
+  <AnimatedCardContent>
+    Your content here
+  </AnimatedCardContent>
+</AnimatedCard>
+```
+
 ## License
 
 MIT

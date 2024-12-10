@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
+import { cn } from '../utils'
 
 export default function AnimatedCard({
   children, 
@@ -7,7 +8,7 @@ export default function AnimatedCard({
   speed = "10",
   initialAngle = "0deg",
   followMouse = false,
-  className = "flex w-full h-full rounded-[20px] p-4", 
+  className,
   style,
 }) {
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
@@ -74,7 +75,12 @@ export default function AnimatedCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={className}
+      className={cn(
+        // Default styles
+        'flex w-full h-full p-2 rounded-[15px]',
+        // User provided styles will override defaults
+        className
+      )}
     >
       {children}
     </div>

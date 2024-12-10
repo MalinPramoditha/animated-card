@@ -1,17 +1,16 @@
 import React from 'react'
+import { cn } from '../utils'
 
 export default function AnimatedCardContent({
   children,
-  className = 'flex w-full h-full rounded-[20px] p-4 bg-background',
+  className,
   style,
-  }) {
-  const contentStyle = {
-    ...style,
-    ...className && { className }
-  }
-
+}) {
   return (
-    <div style={contentStyle}>
+    <div 
+      style={style} 
+      className={cn(className, 'flex w-full h-full p-2 rounded-[12px] bg-background')}
+    >
       {children}
     </div>
   )
