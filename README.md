@@ -2,6 +2,10 @@
 
 A React component library for creating beautiful animated gradient cards with mouse interaction effects.
 
+## Screenshots
+
+![App Screenshot](https://res.cloudinary.com/gamey/image/upload/v1733893658/git/lwqmrwfkkg9vm7bs2o6k.png)
+
 ## Installation
 
 ```bash

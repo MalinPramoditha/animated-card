@@ -65,6 +65,8 @@ export default function AnimatedCard({
   const cardStyle = {
     ...style,
     background: getBackground(),
+    backgroundPosition: 'center',
+    backgroundSize: '100% 100%',
     animation: (!isHovered || !followMouse) ? `gradient-rotate ${speed}s linear infinite` : 'none',
     transition: 'background 0.2s ease',
   };

@@ -1,6 +1,6 @@
 {
   "name": "next-animated-cards",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A React component library for creating animated cards",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
